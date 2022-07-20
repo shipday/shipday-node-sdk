@@ -1,0 +1,28 @@
+{
+  "name": "shipday",
+  "version": "1.0.0",
+  "description": "Shipday API wrapper",
+  "main": "lib/shipday.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shipday/shipday-node-sdk.git"
+  },
+  "keywords": [
+    "shipday",
+    "delivery solution",
+    "api",
+    "order management"
+  ],
+  "author": "kawnayeen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shipday/shipday-node-sdk/issues"
+  },
+  "homepage": "https://github.com/shipday/shipday-node-sdk#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
