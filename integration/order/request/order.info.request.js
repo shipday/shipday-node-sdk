@@ -1,5 +1,5 @@
-const PaymentMethod = require('./payment.method');
-const CardType = require('./card.type');
+const PaymentMethod = require('../types/payment.method');
+const CardType = require('../types/card.type');
 
 class OrderInfoRequest {
   constructor(

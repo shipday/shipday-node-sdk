@@ -10,7 +10,7 @@ class Shipday {
   }
 
   sayHello() {
-    console.log(this.axiosClient);
+    return 'shipday node sdk - v 1.0.0';
   }
 }
 

@@ -1,4 +1,4 @@
-const OrderState = require('./order.state');
+const OrderState = require('./types/order.state');
 
 class OrderQueryRequest {
   constructor(startTime, endTime, orderStatus, startCursor, endCursor) {

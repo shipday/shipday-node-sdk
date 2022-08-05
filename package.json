@@ -2,7 +2,7 @@
   "name": "shipday",
   "version": "1.0.0",
   "description": "Shipday API wrapper",
-  "main": "lib/shipday.js",
+  "main": "integration/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
