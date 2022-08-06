@@ -51,5 +51,12 @@ And it will look like following in the console:-
 }
 ```
 
-
-
+## Run Tests
+To run the tests, first resolve all dependencies by using
+```npm
+npm install
+```
+and then execute the following
+```npm
+npm run test
+```
