@@ -1,3 +1,5 @@
+const processApiError = require('../util/response.util');
+
 class OrderService {
   constructor(client) {
     this.client = client;
@@ -8,25 +10,30 @@ class OrderService {
       const response = await this.client.get('orders');
       return response.data;
     } catch (e) {
-      const status = e.response.status;
-      if (status === 403)
-        throw new Error('authentication error');
-      throw new Error('bad request');
+      processApiError(e);
     }
   }
 
   async getOrderDetails(orderNumber) {
     if (!orderNumber)
       throw new Error('order number is null');
-    const response = await this.client.get(`orders/${orderNumber}`);
-    return response.data;
+    try {
+      const response = await this.client.get(`orders/${orderNumber}`);
+      return response.data;
+    } catch (e) {
+      processApiError(e);
+    }
   }
 
   async getOrderQuery(orderQueryRequest) {
     orderQueryRequest.isValid();
     const requestBody = orderQueryRequest.getRequestBody();
-    const response = await this.client.post(`orders/query`, requestBody);
-    return response.data;
+    try {
+      const response = await this.client.post(`orders/query`, requestBody);
+      return response.data;
+    } catch (e) {
+      processApiError(e);
+    }
   }
 
   async deleteOrder(orderId) {
@@ -39,11 +46,7 @@ class OrderService {
       await this.client.delete(`/orders/${orderId}`);
       return "OK";
     } catch (e) {
-      const statusCode = e.response.status;
-      if (statusCode === 403)
-        return new Error('authentication error');
-      else
-        return new Error('bad request');
+      processApiError(e);
     }
   }
 
@@ -62,11 +65,7 @@ class OrderService {
       await this.client.put(`/orders/assign/${orderId}/${carrierId}`);
       return "OK";
     } catch (e) {
-      const statusCode = e.response.status;
-      if (statusCode === 403)
-        return new Error('authentication error');
-      else
-        return new Error('bad request');
+      processApiError(e);
     }
   }
 
@@ -74,18 +73,23 @@ class OrderService {
     const requestBody = orderInfoRequest.getRequestBody();
     if (requestBody.orderId)
       throw new Error('should not have any order id during insert');
-    console.log(requestBody);
-    const response = await this.client.post('orders', requestBody);
-    return response.data;
+    try {
+      const response = await this.client.post('orders', requestBody);
+      return response.data;
+    } catch (e) {
+      processApiError(e);
+    }
   }
 
   async editOrder(orderInfoRequest) {
     const requestBody = orderInfoRequest.getRequestBody();
-    if (requestBody.orderId) {
+    if (!requestBody.orderId)
+      throw new Error('order must have id to edit');
+    try {
       const response = await this.client.put(`order/edit/${requestBody.orderId}`, requestBody);
       return response.data;
-    } else {
-      throw new Error('order must have id to edit');
+    } catch (e) {
+      processApiError(e);
     }
   }
 }

@@ -1,4 +1,4 @@
-const OrderState = require('./types/order.state');
+const OrderState = require('../types/order.state');
 
 class OrderQueryRequest {
   constructor(startTime, endTime, orderStatus, startCursor, endCursor) {
@@ -28,8 +28,6 @@ class OrderQueryRequest {
       if (typeof this.endCursor !== 'number') {
         throw new Error('end cursor is not a valid number');
       }
-
-    console.log('done with the validation steps');
   }
 
   getRequestBody() {

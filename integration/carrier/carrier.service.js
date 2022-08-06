@@ -1,11 +1,17 @@
+const processApiError = require('../util/response.util');
+
 class CarrierService {
   constructor(client) {
     this.client = client;
   }
 
   async getCarriers() {
-    const response = await this.client.get('carriers');
-    return response.data;
+    try {
+      const response = await this.client.get('carriers');
+      return response.data;
+    } catch (e) {
+      processApiError(e);
+    }
   }
 
   async addCarrier(carrierRequest) {
@@ -16,10 +22,8 @@ class CarrierService {
       const response = await this.client.post('carriers', carrierRequest.getRequestBody());
       return response.data;
     } catch (e) {
-      console.log(e);
-      return new Error('something went wrong');
+      processApiError(e);
     }
-
   }
 
   async deleteCarrier(carrierId) {
@@ -29,11 +33,7 @@ class CarrierService {
       await this.client.delete(`carriers/${carrierId}`);
       return "OK";
     } catch (e) {
-      const statusCode = e.response.status;
-      if (statusCode === 403)
-        return new Error('authentication error');
-      else
-        return new Error('bad request');
+      processApiError(e);
     }
   }
 }
