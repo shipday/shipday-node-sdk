@@ -4,7 +4,7 @@
   "description": "Shipday API wrapper",
   "main": "integration/index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --recursive || true"
   },
   "repository": {
     "type": "git",
