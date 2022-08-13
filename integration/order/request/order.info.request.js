@@ -1,5 +1,6 @@
 const PaymentMethod = require('../types/payment.method');
 const CardType = require('../types/card.type');
+const Address = require('./address');
 
 class OrderInfoRequest {
   constructor(
@@ -182,12 +183,12 @@ class OrderInfoRequest {
   }
 
   setPickup(pickupAddress) {
-    if (pickupAddress)
+    if (pickupAddress && pickupAddress.isValidAddress())
       this.pickupAddress = pickupAddress;
   }
 
   setDropOff(dropOffAddress) {
-    if (dropOffAddress)
+    if (dropOffAddress && dropOffAddress.isValidAddress())
       this.dropOffAddress = dropOffAddress;
   }
 
