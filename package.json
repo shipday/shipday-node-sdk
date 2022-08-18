@@ -1,6 +1,6 @@
 {
   "name": "shipday",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Shipday API wrapper",
   "main": "integration/index.js",
   "scripts": {
