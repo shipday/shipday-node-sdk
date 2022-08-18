@@ -27,6 +27,16 @@ class OnDemandDeliveryService {
       processApiError(e);
     }
   }
+
+  async assignToOnDemand(assignOnDemandRequest) {
+    assignOnDemandRequest.isValidAssignRequest();
+    try {
+      const response = await this.client.post('/on-demand/assign', assignOnDemandRequest.getRequestBody());
+      return response.data;
+    } catch (e) {
+      processApiError(e);
+    }
+  }
 }
 
 module.exports = OnDemandDeliveryService
