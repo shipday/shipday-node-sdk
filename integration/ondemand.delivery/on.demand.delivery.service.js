@@ -15,11 +15,7 @@ class OnDemandDeliveryService {
   }
 
   async getEstimate(orderId) {
-    if (!orderId)
-      throw new Error('order id required to get estimate');
-    if (typeof orderId !== 'number')
-      throw new Error('order id is not of number type');
-
+    this.validateOrderId(orderId);
     try {
       const response = await this.client.get(`/on-demand/estimate/${orderId}`);
       return response.data;
@@ -39,17 +35,30 @@ class OnDemandDeliveryService {
   }
 
   async getDetails(orderId) {
-    if (!orderId)
-      throw new Error('order id required to get on demand delivery details');
-    if (typeof orderId !== 'number')
-      throw new Error('order id is not of number type');
-
+    this.validateOrderId(orderId);
     try {
       const response = await this.client.get(`on-demand/details/${orderId}`);
       return response.data;
     } catch (e) {
       processApiError(e);
     }
+  }
+
+  async cancelAssignment(orderId) {
+    this.validateOrderId(orderId);
+    try {
+      const response = await this.client.post(`on-demand/cancel/${orderId}`);
+      return response.data;
+    } catch (e) {
+      processApiError(e);
+    }
+  }
+
+  validateOrderId(orderId) {
+    if (!orderId)
+      throw new Error('order id required to get on demand delivery details');
+    if (typeof orderId !== 'number')
+      throw new Error('order id is not of number type');
   }
 }
 
