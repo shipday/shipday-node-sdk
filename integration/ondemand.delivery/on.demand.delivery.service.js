@@ -13,6 +13,20 @@ class OnDemandDeliveryService {
       processApiError(e);
     }
   }
+
+  async getEstimate(orderId) {
+    if (!orderId)
+      throw new Error('order id required to get estimate');
+    if (typeof orderId !== 'number')
+      throw new Error('order id is not of number type');
+
+    try {
+      const response = await this.client.get(`/on-demand/estimate/${orderId}`);
+      return response.data;
+    } catch (e) {
+      processApiError(e);
+    }
+  }
 }
 
 module.exports = OnDemandDeliveryService
