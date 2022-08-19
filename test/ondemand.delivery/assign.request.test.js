@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const AssignRequest = require('../../integration/ondemand.delivery/assign.request');
 
-describe('Assign on demand delivery request', () => {
+describe('Assign Request for on demand delivery', () => {
 
   describe('name', () => {
     it('should throw error if name is missing', () => {
