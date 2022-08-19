@@ -54,6 +54,16 @@ class OnDemandDeliveryService {
     }
   }
 
+  async checkAvailability(availabilityRequest) {
+    availabilityRequest.isValidAvailabilityRequest();
+    try {
+      const response = await this.client.post('third-party/availability', availabilityRequest.getRequestBody());
+      return response.data;
+    } catch (e) {
+      processApiError(e);
+    }
+  }
+
   validateOrderId(orderId) {
     if (!orderId)
       throw new Error('order id required to get on demand delivery details');
