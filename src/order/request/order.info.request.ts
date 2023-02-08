@@ -1,11 +1,44 @@
-const PaymentMethod = require('../types/payment.method');
-const CardType = require('../types/card.type');
-const Address = require('./address');
+import PaymentMethod from '../types/payment.method';
+import CardType from '../types/card.type';
+import Address from './address';
 
-class OrderInfoRequest {
+export default class OrderInfoRequest {
+  orderNumber: string;
+  customerName: string;
+  customerAddress: Address;
+  customerEmail: string;
+  customerPhoneNumber: string;
+  restaurantName: string;
+  restaurantAddress: Address;
+  yyyy_mm_dd_regex: RegExp;
+  hh_mm_ss_regex: RegExp;
+  orderId?: number;
+  restaurantPhoneNumber?: string;
+  expectedDeliveryDate?: string;
+  expectedPickupTime?: string;
+  expectedDeliveryTime?: string;
+  pickupLatitude?: number;
+  pickupLongitude?: number;
+  deliveryLatitude?: number;
+  deliveryLongitude?: number;
+  tips?: number;
+  tax?: number;
+  discountAmount?: number;
+  deliveryFee?: number;
+  orderCost?: number;
+  deliveryInstruction?: string;
+  orderSource?: string;
+  additionalId?: string;
+  clientRestaurantId?: number ;
+  paymentOption?: string;
+  cardType?: string;
+  lastFour?: string;
+  orderItems?: OrderItem[];
+  pickupAddress?: Address;
+  dropOffAddress?: Address;
   constructor(
-    orderNumber, customerName, customerAddress, customerEmail,
-    customerPhoneNumber, restaurantName, restaurantAddress
+    orderNumber: string, customerName: string, customerAddress: Address, customerEmail: string,
+    customerPhoneNumber: string, restaurantName: string, restaurantAddress: Address
   ) {
     this.orderNumber = orderNumber;
     this.customerName = customerName;
@@ -18,12 +51,12 @@ class OrderInfoRequest {
     this.hh_mm_ss_regex = /^(?:2[0-3]|[01]\d):[0-5]\d:[0-5]\d$/;
   }
 
-  setOrderId(orderId) {
+  setOrderId(orderId: number) {
     if (orderId && typeof orderId === 'number')
       this.orderId = orderId;
   }
 
-  setRestaurantPhoneNumber(phone) {
+  setRestaurantPhoneNumber(phone: string) {
     if (phone && typeof phone === 'string') {
       this.restaurantPhoneNumber = phone;
     } else {
@@ -31,7 +64,7 @@ class OrderInfoRequest {
     }
   }
 
-  setExpectedDeliveryDate(deliveryDate) {
+  setExpectedDeliveryDate(deliveryDate: string) {
     if (deliveryDate.match(this.yyyy_mm_dd_regex)) {
       this.expectedDeliveryDate = deliveryDate;
     } else {
@@ -39,7 +72,7 @@ class OrderInfoRequest {
     }
   }
 
-  setExpectedPickupTime(pickupTime) {
+  setExpectedPickupTime(pickupTime: string) {
     if (pickupTime.match(this.hh_mm_ss_regex)) {
       this.expectedPickupTime = pickupTime;
     } else {
@@ -47,7 +80,7 @@ class OrderInfoRequest {
     }
   }
 
-  setExpectedDeliveryTime(deliveryTime) {
+  setExpectedDeliveryTime(deliveryTime: string) {
     if (deliveryTime.match(this.hh_mm_ss_regex)) {
       this.expectedDeliveryTime = deliveryTime;
     } else {
@@ -55,7 +88,7 @@ class OrderInfoRequest {
     }
   }
 
-  setPickupLatLong(latitude, longitude) {
+  setPickupLatLong(latitude: number, longitude: number) {
     if (this.isLatitude(latitude))
       this.pickupLatitude = latitude;
     else
@@ -66,15 +99,15 @@ class OrderInfoRequest {
       throw new Error('pickup longitude is invalid');
   }
 
-  isLatitude(lat) {
+  isLatitude(lat: number) {
     return isFinite(lat) && Math.abs(lat) <= 90;
   }
 
-  isLongitude(lng) {
+  isLongitude(lng: number) {
     return isFinite(lng) && Math.abs(lng) <= 180;
   }
 
-  setDeliveryLatLong(latitude, longitude) {
+  setDeliveryLatLong(latitude: number, longitude: number) {
     if (this.isLatitude(latitude))
       this.deliveryLatitude = latitude;
     else
@@ -85,28 +118,28 @@ class OrderInfoRequest {
       throw new Error('delivery longitude is invalid');
   }
 
-  setTips(tips) {
+  setTips(tips: number) {
     if (tips && typeof tips === 'number')
       this.tips = tips;
     else
       throw new Error('invalid tips');
   }
 
-  setTax(tax) {
+  setTax(tax: number) {
     if (tax && typeof tax === 'number')
       this.tax = tax;
     else
       throw new Error('invalid tax');
   }
 
-  setDiscountAmount(discountAmount) {
+  setDiscountAmount(discountAmount: number) {
     if (discountAmount && typeof discountAmount === 'number')
       this.discountAmount = discountAmount;
     else
       throw new Error('invalid discount amount');
   }
 
-  setDeliveryFee(deliveryFee) {
+  setDeliveryFee(deliveryFee: number) {
     if (deliveryFee && typeof deliveryFee === 'number') {
       this.deliveryFee = deliveryFee;
     } else {
@@ -114,7 +147,7 @@ class OrderInfoRequest {
     }
   }
 
-  setTotalOrderCost(orderCost) {
+  setTotalOrderCost(orderCost: number) {
     if (orderCost && typeof orderCost === 'number') {
       this.orderCost = orderCost;
     } else {
@@ -122,7 +155,7 @@ class OrderInfoRequest {
     }
   }
 
-  setDeliveryInstruction(deliveryInstruction) {
+  setDeliveryInstruction(deliveryInstruction: string) {
     if (deliveryInstruction && typeof deliveryInstruction === 'string') {
       this.deliveryInstruction = deliveryInstruction;
     } else {
@@ -130,7 +163,7 @@ class OrderInfoRequest {
     }
   }
 
-  setOrderSource(orderSource) {
+  setOrderSource(orderSource: string) {
     if (orderSource && typeof orderSource === 'string') {
       this.orderSource = orderSource;
     } else {
@@ -138,7 +171,7 @@ class OrderInfoRequest {
     }
   }
 
-  setAdditionalId(additionalId) {
+  setAdditionalId(additionalId: string) {
     if (additionalId && typeof additionalId === 'string') {
       this.additionalId = additionalId;
     } else {
@@ -146,7 +179,7 @@ class OrderInfoRequest {
     }
   }
 
-  setClientRestaurantId(restaurantId) {
+  setClientRestaurantId(restaurantId: number) {
     if (restaurantId && typeof restaurantId === 'number') {
       this.clientRestaurantId = restaurantId;
     } else {
@@ -154,7 +187,7 @@ class OrderInfoRequest {
     }
   }
 
-  setPaymentMethod(paymentOption) {
+  setPaymentMethod(paymentOption: string) {
     if (paymentOption && Object.values(PaymentMethod).indexOf(paymentOption) >= 0) {
       this.paymentOption = paymentOption;
     } else {
@@ -162,7 +195,7 @@ class OrderInfoRequest {
     }
   }
 
-  setCreditCardType(cardType) {
+  setCreditCardType(cardType: string) {
     if (cardType && Object.values(CardType).indexOf(cardType) >= 0) {
       this.cardType = cardType;
     } else {
@@ -170,24 +203,24 @@ class OrderInfoRequest {
     }
   }
 
-  setCardLast4(lastFour) {
+  setCardLast4(lastFour: string) {
     if (lastFour && typeof lastFour === 'string') {
       this.lastFour = lastFour;
     }
   }
 
-  setOrderItems(orderItems) {
+  setOrderItems(orderItems: OrderItem[]) {
     if (orderItems && orderItems.constructor === Array) {
       this.orderItems = orderItems;
     }
   }
 
-  setPickup(pickupAddress) {
+  setPickup(pickupAddress: Address) {
     if (pickupAddress && pickupAddress.isValidAddress())
       this.pickupAddress = pickupAddress;
   }
 
-  setDropOff(dropOffAddress) {
+  setDropOff(dropOffAddress: Address) {
     if (dropOffAddress && dropOffAddress.isValidAddress())
       this.dropOffAddress = dropOffAddress;
   }
@@ -208,7 +241,7 @@ class OrderInfoRequest {
     if (!this.restaurantAddress || typeof this.restaurantAddress !== 'string')
       throw new Error('invalid restaurant address');
 
-    let requestBody = {
+    let requestBody: Record<string, any> = {
       'orderNumber': this.orderNumber,
       'customerName': this.customerName,
       'customerAddress': this.customerAddress,
@@ -242,13 +275,12 @@ class OrderInfoRequest {
       'dropoff': this.dropOffAddress
     }
 
-    Object.keys(requestBody).forEach(key => {
-      if (requestBody[key] === null || requestBody[key] === undefined)
+    Object.keys(requestBody).forEach((key) => { 
+      if(requestBody[key] === undefined || requestBody[key] === null){
         delete requestBody[key];
+      }
     });
 
     return requestBody;
   }
 }
-
-module.exports = OrderInfoRequest

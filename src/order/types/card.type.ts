@@ -4,5 +4,4 @@ const CardType = {
   AMEX: 'AMEX',
   OTHER: 'other'
 }
-
-module.exports = CardType;
+export default CardType;

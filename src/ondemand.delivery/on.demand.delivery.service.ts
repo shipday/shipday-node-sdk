@@ -1,7 +1,11 @@
-const processApiError = require('../util/response.util');
+import { AxiosInstance } from "axios";
 
-class OnDemandDeliveryService {
-  constructor(client) {
+import processApiError from '../util/response.util';
+
+export default class OnDemandDeliveryService {
+  client: AxiosInstance;
+
+  constructor(client: AxiosInstance) {
     this.client = client;
   }
 
@@ -14,7 +18,7 @@ class OnDemandDeliveryService {
     }
   }
 
-  async getEstimate(orderId) {
+  async getEstimate(orderId: any) {
     this.validateOrderId(orderId);
     try {
       const response = await this.client.get(`/on-demand/estimate/${orderId}`);
@@ -24,7 +28,7 @@ class OnDemandDeliveryService {
     }
   }
 
-  async assignToOnDemand(assignOnDemandRequest) {
+  async assignToOnDemand(assignOnDemandRequest: { isValidAssignRequest: () => void; getRequestBody: () => any; }) {
     assignOnDemandRequest.isValidAssignRequest();
     try {
       const response = await this.client.post('/on-demand/assign', assignOnDemandRequest.getRequestBody());
@@ -34,7 +38,7 @@ class OnDemandDeliveryService {
     }
   }
 
-  async getDetails(orderId) {
+  async getDetails(orderId: any) {
     this.validateOrderId(orderId);
     try {
       const response = await this.client.get(`on-demand/details/${orderId}`);
@@ -44,7 +48,7 @@ class OnDemandDeliveryService {
     }
   }
 
-  async cancelAssignment(orderId) {
+  async cancelAssignment(orderId: any) {
     this.validateOrderId(orderId);
     try {
       const response = await this.client.post(`on-demand/cancel/${orderId}`);
@@ -54,7 +58,7 @@ class OnDemandDeliveryService {
     }
   }
 
-  async checkAvailability(availabilityRequest) {
+  async checkAvailability(availabilityRequest: { isValidAvailabilityRequest: () => void; getRequestBody: () => any; }) {
     availabilityRequest.isValidAvailabilityRequest();
     try {
       const response = await this.client.post('third-party/availability', availabilityRequest.getRequestBody());
@@ -64,12 +68,10 @@ class OnDemandDeliveryService {
     }
   }
 
-  validateOrderId(orderId) {
+  validateOrderId(orderId: any) {
     if (!orderId)
       throw new Error('order id required to get on demand delivery details');
     if (typeof orderId !== 'number')
       throw new Error('order id is not of number type');
   }
 }
-
-module.exports = OnDemandDeliveryService

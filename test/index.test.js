@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const Shipday = require('../integration');
+const Shipday = require('../src');
 
 describe('Shipday SDK', () => {
   it('should return version', () => {

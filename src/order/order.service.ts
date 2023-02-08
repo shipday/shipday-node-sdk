@@ -1,7 +1,13 @@
-const processApiError = require('../util/response.util');
+import { AxiosInstance } from "axios";
 
-class OrderService {
-  constructor(client) {
+import processApiError from '../util/response.util';
+import OrderInfoRequest from "./request/order.info.request";
+import OrderQueryRequest from "./request/order.query.request";
+
+export default class OrderService {
+  client: AxiosInstance;
+
+  constructor(client: AxiosInstance) {
     this.client = client;
   }
 
@@ -14,7 +20,7 @@ class OrderService {
     }
   }
 
-  async getOrderDetails(orderNumber) {
+  async getOrderDetails(orderNumber: string) {
     if (!orderNumber)
       throw new Error('order number is null');
     try {
@@ -25,7 +31,7 @@ class OrderService {
     }
   }
 
-  async getOrderQuery(orderQueryRequest) {
+  async getOrderQuery(orderQueryRequest: OrderQueryRequest) {
     orderQueryRequest.isValid();
     const requestBody = orderQueryRequest.getRequestBody();
     try {
@@ -36,7 +42,7 @@ class OrderService {
     }
   }
 
-  async deleteOrder(orderId) {
+  async deleteOrder(orderId: number) {
     if (!orderId)
       throw new Error('order id is null');
     if (typeof orderId !== 'number') {
@@ -50,7 +56,7 @@ class OrderService {
     }
   }
 
-  async assignOrder(orderId, carrierId) {
+  async assignOrder(orderId: number, carrierId: string) {
     if (!orderId)
       throw new Error('order id is null');
     if (typeof orderId !== 'number') {
@@ -69,7 +75,7 @@ class OrderService {
     }
   }
 
-  async insertOrder(orderInfoRequest) {
+  async insertOrder(orderInfoRequest: OrderInfoRequest) {
     const requestBody = orderInfoRequest.getRequestBody();
     if (requestBody.orderId)
       throw new Error('should not have any order id during insert');
@@ -81,7 +87,7 @@ class OrderService {
     }
   }
 
-  async editOrder(orderInfoRequest) {
+  async editOrder(orderInfoRequest: OrderInfoRequest) {
     const requestBody = orderInfoRequest.getRequestBody();
     if (!requestBody.orderId)
       throw new Error('order must have id to edit');
@@ -93,5 +99,3 @@ class OrderService {
     }
   }
 }
-
-module.exports = OrderService;

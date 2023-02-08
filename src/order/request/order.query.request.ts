@@ -1,6 +1,6 @@
 const OrderState = require('../types/order.state');
 
-class OrderQueryRequest {
+export default class OrderQueryRequest {
   constructor(startTime, endTime, orderStatus, startCursor, endCursor) {
     this.startTime = startTime;
     this.endTime = endTime;
@@ -28,7 +28,9 @@ class OrderQueryRequest {
       if (typeof this.endCursor !== 'number') {
         throw new Error('end cursor is not a valid number');
       }
-  }
+      
+    return true;
+}
 
   getRequestBody() {
     const startTimeInISO8601 = this.startTime ? this.startTime.toISOString() : null;
@@ -42,5 +44,3 @@ class OrderQueryRequest {
     };
   }
 }
-
-module.exports = OrderQueryRequest;

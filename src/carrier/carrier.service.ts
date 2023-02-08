@@ -1,7 +1,8 @@
-const processApiError = require('../util/response.util');
+import processApiError from '../util/response.util';
 
-class CarrierService {
-  constructor(client) {
+export default class CarrierService {
+  client: any;
+  constructor(client: any) {
     this.client = client;
   }
 
@@ -14,7 +15,7 @@ class CarrierService {
     }
   }
 
-  async addCarrier(carrierRequest) {
+  async addCarrier(carrierRequest: { isValid: () => void; getRequestBody: () => any; }) {
     if (!carrierRequest)
       throw new Error('carrier info is null');
     carrierRequest.isValid();
@@ -26,7 +27,7 @@ class CarrierService {
     }
   }
 
-  async deleteCarrier(carrierId) {
+  async deleteCarrier(carrierId: any) {
     if (!carrierId)
       throw new Error('carrier id is null');
     try {
@@ -37,5 +38,3 @@ class CarrierService {
     }
   }
 }
-
-module.exports = CarrierService;

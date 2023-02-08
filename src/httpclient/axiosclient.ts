@@ -1,6 +1,6 @@
-const axios = require('axios');
+import axios, { AxiosInstance } from 'axios';
 
-function constructAxios(apiKey, timeOut = 1000) {
+export default function constructAxios(apiKey, timeOut = 1000): AxiosInstance {
   return axios.create({
     baseURL: 'https://api.shipday.com/',
     timeout: timeOut,
@@ -10,5 +10,3 @@ function constructAxios(apiKey, timeOut = 1000) {
     }
   });
 }
-
-module.exports = constructAxios;

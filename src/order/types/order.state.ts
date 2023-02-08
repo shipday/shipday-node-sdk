@@ -10,5 +10,4 @@ const OrderState = {
   ACTIVE: 'ACTIVE',
   INCOMPLETE: 'INCOMPLETE'
 }
-
-module.exports = OrderState;
+export default OrderState;

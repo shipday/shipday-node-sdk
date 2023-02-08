@@ -1,5 +1,10 @@
-class AssignRequest {
-  constructor(name, orderId, tip, estimateReference) {
+export default class AssignRequest {
+  name: string;
+  orderId: string;
+  tip: string;
+  estimateReference: string;
+
+  constructor(name: string, orderId: string, tip: string, estimateReference: string) {
     this.name = name;
     this.orderId = orderId;
     this.tip = tip;
@@ -34,5 +39,3 @@ class AssignRequest {
     }
   }
 }
-
-module.exports = AssignRequest;

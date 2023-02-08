@@ -1,5 +1,12 @@
-class Address {
-  constructor(unit, street, city, state, zip, country) {
+export default class Address {
+  unit: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
+  
+  constructor(unit: string, street: string, city: string, state: string, zip: string, country: string) {
     this.unit = unit;
     this.street = street;
     this.city = city;
@@ -19,6 +26,8 @@ class Address {
       throw new Error('state need to be of string type');
     if (typeof this.country !== 'string')
       throw new Error('country need to be of string type');
+      
+    return true;
   }
 
   getRequestBody() {

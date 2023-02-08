@@ -1,5 +1,9 @@
-class AvailabilityRequest {
-  constructor(pickupAddress, deliveryAddress, deliveryTime) {
+export default class AvailabilityRequest {
+  pickupAddress: string;
+  deliveryAddress: string;
+  deliveryTime: Date;
+
+  constructor(pickupAddress: string, deliveryAddress: string, deliveryTime: Date) {
     this.pickupAddress = pickupAddress;
     this.deliveryAddress = deliveryAddress;
     this.deliveryTime = deliveryTime;
@@ -30,5 +34,3 @@ class AvailabilityRequest {
     }
   }
 }
-
-module.exports = AvailabilityRequest;
