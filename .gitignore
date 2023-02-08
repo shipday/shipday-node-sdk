@@ -1,4 +1,4 @@
 .idea
 node_modules
-integration/test.shipday.js
+#src/test.shipday.js
 package-lock.json

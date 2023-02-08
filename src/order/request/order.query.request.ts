@@ -1,7 +1,13 @@
-const OrderState = require('../types/order.state');
+import OrderState from "../types/order.state";
 
 export default class OrderQueryRequest {
-  constructor(startTime, endTime, orderStatus, startCursor, endCursor) {
+  startTime: Date;
+  endTime: Date;
+  orderStatus: string;
+  startCursor: number;
+  endCursor: number;
+
+  constructor(startTime: Date, endTime: Date, orderStatus: string, startCursor: number, endCursor: number) {
     this.startTime = startTime;
     this.endTime = endTime;
     this.orderStatus = orderStatus;
