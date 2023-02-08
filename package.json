@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Shipday API wrapper",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "/dist"
+  ],
   "scripts": {
     "test": "mocha --recursive || true"
   },

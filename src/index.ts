@@ -4,7 +4,7 @@ import CarrierService from './carrier/carrier.service';
 import OnDemandService from './ondemand.delivery/on.demand.delivery.service';
 import { AxiosInstance } from 'axios';
 
-class Shipday {
+export default class Shipday {
   axiosClient: AxiosInstance;
   orderService: OrderService;
   carrierService: CarrierService;
@@ -21,5 +21,3 @@ class Shipday {
     return 'shipday node sdk - v 1.1.0';
   }
 }
-
-export default Shipday;
