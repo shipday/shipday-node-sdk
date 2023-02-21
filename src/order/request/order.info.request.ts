@@ -231,7 +231,7 @@ export default class OrderInfoRequest {
       throw new Error('order number required');
     if (!this.customerName || typeof this.customerName !== 'string')
       throw new Error('invalid customer name');
-    if (!this.customerAddress || typeof this.customerAddress !== 'string')
+    if (!this.customerAddress || typeof this.customerAddress !== 'Address')
       throw new Error('invalid customer address');
     if (!this.customerEmail || typeof this.customerEmail !== 'string')
       throw new Error('invalid customer email');
@@ -239,7 +239,7 @@ export default class OrderInfoRequest {
       throw new Error('invalid customer phone number');
     if (!this.restaurantName || typeof this.restaurantName !== 'string')
       throw new Error('invalid restaurant name');
-    if (!this.restaurantAddress || typeof this.restaurantAddress !== 'string')
+    if (!this.restaurantAddress || typeof this.restaurantAddress !== 'Address')
       throw new Error('invalid restaurant address');
 
     let requestBody: Record<string, any> = {
