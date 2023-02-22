@@ -179,7 +179,7 @@ export default class OrderInfoRequest {
       throw new Error('invalid additional id');
     }
   }
-
+  
   setClientRestaurantId(restaurantId: number) {
     if (restaurantId && typeof restaurantId === 'number') {
       this.clientRestaurantId = restaurantId;
