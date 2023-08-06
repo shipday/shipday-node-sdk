@@ -1,4 +1,4 @@
-import Address from '../types/address';
+import Address as AddressType from '../types/address';
 
 export default class Address {
   address: Address;
