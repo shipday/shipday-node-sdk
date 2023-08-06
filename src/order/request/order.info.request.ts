@@ -6,11 +6,11 @@ import OrderItem from './order.item';
 export default class OrderInfoRequest {
   orderNumber: string;
   customerName: string;
-  customerAddress: Address;
+  customerAddress: string;
   customerEmail: string;
   customerPhoneNumber: string;
   restaurantName: string;
-  restaurantAddress: Address;
+  restaurantAddress: string;
   yyyy_mm_dd_regex: RegExp;
   hh_mm_ss_regex: RegExp;
   orderId?: number;
@@ -38,8 +38,8 @@ export default class OrderInfoRequest {
   pickupAddress?: Address;
   dropOffAddress?: Address;
   constructor(
-    orderNumber: string, customerName: string, customerAddress: Address, customerEmail: string,
-    customerPhoneNumber: string, restaurantName: string, restaurantAddress: Address
+    orderNumber: string, customerName: string, customerAddress: string, customerEmail: string,
+    customerPhoneNumber: string, restaurantName: string, restaurantAddress: string
   ) {
     this.orderNumber = orderNumber;
     this.customerName = customerName;
@@ -231,7 +231,7 @@ export default class OrderInfoRequest {
       throw new Error('order number required');
     if (!this.customerName || typeof this.customerName !== 'string')
       throw new Error('invalid customer name');
-    if (!this.customerAddress || !(this.customerAddress instanceof Address))
+    if (!this.customerAddress || typeof this.customerAddress !== 'string')
       throw new Error('invalid customer address');
     if (!this.customerEmail || typeof this.customerEmail !== 'string')
       throw new Error('invalid customer email');
@@ -239,7 +239,7 @@ export default class OrderInfoRequest {
       throw new Error('invalid customer phone number');
     if (!this.restaurantName || typeof this.restaurantName !== 'string')
       throw new Error('invalid restaurant name');
-    if (!this.restaurantAddress || !(this.restaurantAddress instanceof Address))
+    if (!this.restaurantAddress || typeof this.restaurantAddress !== string)
       throw new Error('invalid restaurant address');
 
     let requestBody: Record<string, any> = {
