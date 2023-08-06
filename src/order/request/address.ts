@@ -1,9 +1,10 @@
-import AddressType from '../types/address';
+import AddressFields from '../types/address';
+export {AddressFields}
 
 export default class Address {
-  address: AddressType;
+  address: AddressFields;
   
-  constructor(address: AddressType) {
+  constructor(address: AddressFields) {
     this.address = address;
   }
 

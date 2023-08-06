@@ -1,4 +1,4 @@
-export default type Address = {
+ type AddressFields = {
   unit: string,
   street: string,
   city: string,
@@ -6,3 +6,4 @@ export default type Address = {
   zip: string,
   country: string
 }
+export default AddressFields

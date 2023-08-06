@@ -1,6 +1,6 @@
 import PaymentMethod from '../types/payment.method';
 import CardType from '../types/card.type';
-import Address from '../types/address';
+import AddressFields from '../types/address';
 import OrderItem from './order.item';
 
 export default class OrderInfoRequest {
@@ -35,8 +35,8 @@ export default class OrderInfoRequest {
   cardType?: string;
   lastFour?: string;
   orderItems?: OrderItem[];
-  pickupAddress?: Address;
-  dropOffAddress?: Address;
+  pickupAddress?: AddressFields;
+  dropOffAddress?: AddressFields;
   constructor(
     orderNumber: string, customerName: string, customerAddress: string, customerEmail: string,
     customerPhoneNumber: string, restaurantName: string, restaurantAddress: string
