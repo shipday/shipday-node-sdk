@@ -1,6 +1,6 @@
 import PaymentMethod from '../types/payment.method';
 import CardType from '../types/card.type';
-import Address from './address';
+import Address from '../types/address';
 import OrderItem from './order.item';
 
 export default class OrderInfoRequest {
