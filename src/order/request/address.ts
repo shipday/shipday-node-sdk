@@ -1,10 +1,4 @@
 export default class Address {
-  unit: string;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-  country: string;
   
   constructor(unit: string, street: string, city: string, state: string, zip: string, country: string) {
     this.unit = unit;
