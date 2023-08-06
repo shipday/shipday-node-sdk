@@ -1,24 +1,22 @@
+import Address from '../types/address';
+
 export default class Address {
+  address: Address;
   
-  constructor(unit: string, street: string, city: string, state: string, zip: string, country: string) {
-    this.unit = unit;
-    this.street = street;
-    this.city = city;
-    this.state = state;
-    this.zip = zip;
-    this.country = country;
+  constructor(address: Address) {
+    this.address = address;
   }
 
   isValidAddress() {
-    if (typeof this.unit !== 'string')
+    if (typeof this.address.unit !== 'string')
       throw new Error('unit need to be of string type');
-    if (typeof this.street !== 'string')
+    if (typeof this.address.street !== 'string')
       throw new Error('street need to be of string type');
-    if (typeof this.city !== 'string')
+    if (typeof this.address.city !== 'string')
       throw new Error('city need to be of string type');
-    if (typeof this.state !== 'string')
+    if (typeof this.address.state !== 'string')
       throw new Error('state need to be of string type');
-    if (typeof this.country !== 'string')
+    if (typeof this.address.country !== 'string')
       throw new Error('country need to be of string type');
       
     return true;
@@ -26,14 +24,7 @@ export default class Address {
 
   getRequestBody() {
     return {
-      'address': {
-        'unit': this.unit,
-        'street': this.street,
-        'city': this.city,
-        'state': this.state,
-        'zip': this.zip,
-        'country': this.country
-      }
+      'address': this.address
     }
   }
 }
